@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "lat": {
+            "required": true,
+            "type": "number",
+            "format": "double"
+        },
+        "lng": {
+            "required": true,
+            "type": "number",
+            "format": "double"
+        },
+        "min_timestamp": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "max_timestamp": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "distance": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        }
+    }
+}

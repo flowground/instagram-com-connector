@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "min_timestamp": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "max_timestamp": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "min_id": {
+            "required": false,
+            "type": "string"
+        },
+        "max_id": {
+            "required": false,
+            "type": "string"
+        },
+        "location_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,513 @@
+{
+    "title": "Instagram",
+    "description": "Description of Instagram RESTful API.\n\nCurrent limitations:\n  * Instagram service does not support [cross origin headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)\n  for security reasons, therefore it is not possible to use Swagger UI and make API calls directly from browser.\n  * Modification API requests (`POST`, `DELETE`) require additional security [scopes](https://instagram.com/developer/authorization/)\n  that are available for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/review/) and\n  started in [Sandbox Mode](http://instagram.com/developer/sandbox/).\n  * Consider the [Instagram limitations](https://instagram.com/developer/limits/) for API calls that depends on App Mode.\n\n**Warning:** For Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/) API responses\ncontaining media objects no longer return the `data` field in `comments` and `likes` nodes.\n\nLast update: 2015-11-28\n",
+    "docsUrl": "https://instagram.com/developer",
+    "url": "https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://api.instagram.com/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "api_key": {
+                "label": "access_token (api_key)",
+                "viewClass": "TextFieldView"
+            },
+            "instagram_auth": {
+                "label": "instagram_auth",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://instagram.com/oauth/authorize/"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_geographies__geo_id__media_recent": {
+            "main": "./lib/actions/get_geographies__geo_id__media_recent.js",
+            "title": "Get recent media from a custom geo-id.",
+            "description": "Get recent media from a geography subscription that you created.\n\n**Note:** You can only access Geographies that were explicitly created by your OAuth client. Check the\nGeography Subscriptions section of the [real-time updates page](https://instagram.com/developer/realtime/).\nWhen you create a subscription to some geography that you define, you will be returned a unique `geo-id` that\ncan be used in this query. To backfill photos from the location covered by this geography, use the\n[media search endpoint](https://instagram.com/developer/endpoints/media/).\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_geographies__geo_id__media_recent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_locations_search": {
+            "main": "./lib/actions/get_locations_search.js",
+            "title": "Search for a location by geographic coordinate.",
+            "description": "Search for a location by geographic coordinate.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_locations_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_locations__location_id_": {
+            "main": "./lib/actions/get_locations__location_id_.js",
+            "title": "Get information about a location.",
+            "description": "Get information about a location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_locations__location_id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_locations__location_id__media_recent": {
+            "main": "./lib/actions/get_locations__location_id__media_recent.js",
+            "title": "Get a list of recent media objects from a given location.",
+            "description": "Get a list of recent media objects from a given location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_locations__location_id__media_recent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media_popular": {
+            "main": "./lib/actions/get_media_popular.js",
+            "title": "Get a list of currently popular media.",
+            "description": "Get a list of what media is most popular at the moment. Can return mix of `image` and `video` types.\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media_popular.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media_search": {
+            "main": "./lib/actions/get_media_search.js",
+            "title": "Search for media in a given area.",
+            "description": "Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days.\nDefaults time stamps cover the last 5 days. Can return mix of `image` and `video` types.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media_shortcode__shortcode_": {
+            "main": "./lib/actions/get_media_shortcode__shortcode_.js",
+            "title": "Get information about a media object.",
+            "description": "This endpoint returns the same response as `GET /media/{media-id}`.\n\nA media object's shortcode can be found in its shortlink URL. An example shortlink is\n`http://instagram.com/p/D/`, its corresponding shortcode is `D`.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media_shortcode__shortcode_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media__media_id_": {
+            "main": "./lib/actions/get_media__media_id_.js",
+            "title": "Get information about a media object.",
+            "description": "Get information about a media object. The returned type key will allow you to differentiate between image and\nvideo media.\n\n**Note:** if you authenticate with an OAuth Token, you will receive the user_has_liked key which quickly tells\nyou whether the current user has liked this media item.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media__media_id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media__media_id__comments": {
+            "main": "./lib/actions/get_media__media_id__comments.js",
+            "title": "Get a list of recent comments on a media object.",
+            "description": "Get a list of recent comments on a media object.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media__media_id__comments.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_media__media_id__comments": {
+            "main": "./lib/actions/post_media__media_id__comments.js",
+            "title": "Create a comment on a media object.",
+            "description": "Create a comment on a media object with the following rules:\n\n  * The total length of the comment cannot exceed 300 characters.\n  * The comment cannot contain more than 4 hashtags.\n  * The comment cannot contain more than 1 URL.\n  * The comment cannot consist of all capital letters.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_media__media_id__comments.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_media__media_id__comments__comment_id_": {
+            "main": "./lib/actions/delete_media__media_id__comments__comment_id_.js",
+            "title": "Remove a comment.",
+            "description": "Remove a comment either on the authenticated user's media object or authored by the authenticated user.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_media__media_id__comments__comment_id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_media__media_id__likes": {
+            "main": "./lib/actions/delete_media__media_id__likes.js",
+            "title": "Remove a like on this media by the current user.",
+            "description": "Remove a like on this media by the currently authenticated user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_media__media_id__likes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_media__media_id__likes": {
+            "main": "./lib/actions/get_media__media_id__likes.js",
+            "title": "Get a list of users who have liked this media.",
+            "description": "Get a list of users who have liked this media.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_media__media_id__likes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_media__media_id__likes": {
+            "main": "./lib/actions/post_media__media_id__likes.js",
+            "title": "Set a like on this media by the current user.",
+            "description": "Set a like on this media by the currently authenticated user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_media__media_id__likes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_tags_search": {
+            "main": "./lib/actions/get_tags_search.js",
+            "title": "Search for tags by name.",
+            "description": "Search for tags by name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_tags_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_tags__tag_name_": {
+            "main": "./lib/actions/get_tags__tag_name_.js",
+            "title": "Get information about a tag object.",
+            "description": "Get information about a tag object.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_tags__tag_name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_tags__tag_name__media_recent": {
+            "main": "./lib/actions/get_tags__tag_name__media_recent.js",
+            "title": "Get a list of recently tagged media.",
+            "description": "Get a list of recently tagged media. Use the `max_tag_id` and `min_tag_id` parameters in the pagination\nresponse to paginate through these objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_tags__tag_name__media_recent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users_search": {
+            "main": "./lib/actions/get_users_search.js",
+            "title": "Search for a user by name.",
+            "description": "Search for a user by name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users_self_feed": {
+            "main": "./lib/actions/get_users_self_feed.js",
+            "title": "See the authenticated user's feed.",
+            "description": "See the authenticated user's feed.\n\n**Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users_self_feed.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users_self_media_liked": {
+            "main": "./lib/actions/get_users_self_media_liked.js",
+            "title": "See the list of media liked by the authenticated user.",
+            "description": "See the list of media liked by the authenticated user. Private media is returned as long as the authenticated\nuser has permission to view that media. Liked media lists are only available for the currently authenticated\nuser.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users_self_media_liked.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users_self_requested_by": {
+            "main": "./lib/actions/get_users_self_requested_by.js",
+            "title": "List the users who have requested this user's permission to follow.",
+            "description": "List the users who have requested this user's permission to follow.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users_self_requested_by.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users__user_id_": {
+            "main": "./lib/actions/get_users__user_id_.js",
+            "title": "Get basic information about a user.",
+            "description": "Get basic information about a user. To get information about the owner of the access token, you can use\n**self** instead of the `user-id`.\n\nSecurity scope `public_content` is required to read information about other users.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users__user_id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users__user_id__followed_by": {
+            "main": "./lib/actions/get_users__user_id__followed_by.js",
+            "title": "Get the list of users this user is followed by.",
+            "description": "Get the list of users this user is followed by. To get users followed by the owner of the access token, you\ncan use **self** instead of the `user-id`.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users__user_id__followed_by.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users__user_id__follows": {
+            "main": "./lib/actions/get_users__user_id__follows.js",
+            "title": "Get the list of users this user follows.",
+            "description": "Get the list of users this user follows. To get follows of the owner of the access token, you can use **self**\ninstead of the `user-id`.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users__user_id__follows.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users__user_id__media_recent": {
+            "main": "./lib/actions/get_users__user_id__media_recent.js",
+            "title": "Get the most recent media published by a user.",
+            "description": "Get the most recent media published by a user. To get the most recent media published by the owner of the\naccess token, you can use **self** instead of the `user-id`.\n\nSecurity scope `public_content` is required to read information about other users.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users__user_id__media_recent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users__user_id__relationship": {
+            "main": "./lib/actions/get_users__user_id__relationship.js",
+            "title": "Get information about a relationship to another user.",
+            "description": "Get information about a relationship to another user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users__user_id__relationship.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_users__user_id__relationship": {
+            "main": "./lib/actions/post_users__user_id__relationship.js",
+            "title": "Modify the relationship between the current user and the target user.",
+            "description": "Modify the relationship between the current user and the target user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_users__user_id__relationship.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

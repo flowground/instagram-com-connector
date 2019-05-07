@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "action": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "follow",
+                "unfollow",
+                "block",
+                "unblock",
+                "approve",
+                "ignore"
+            ]
+        },
+        "user_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

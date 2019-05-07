@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "media_id": {
+            "required": true,
+            "type": "string"
+        },
+        "comment_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

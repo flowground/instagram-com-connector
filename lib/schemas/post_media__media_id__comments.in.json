@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "text": {
+            "required": true,
+            "type": "string"
+        },
+        "media_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

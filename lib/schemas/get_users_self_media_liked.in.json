@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "count": {
+            "required": false,
+            "type": "integer"
+        },
+        "max_like_id": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

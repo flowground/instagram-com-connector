@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "distance": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "facebook_places_id": {
+            "required": false,
+            "type": "string"
+        },
+        "foursquare_id": {
+            "required": false,
+            "type": "string"
+        },
+        "lat": {
+            "required": false,
+            "type": "number",
+            "format": "double"
+        },
+        "lng": {
+            "required": false,
+            "type": "number",
+            "format": "double"
+        },
+        "foursquare_v2_id": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

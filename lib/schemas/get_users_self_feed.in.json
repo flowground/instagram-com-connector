@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "count": {
+            "required": false,
+            "type": "integer"
+        },
+        "min_id": {
+            "required": false,
+            "type": "string"
+        },
+        "max_id": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
